@@ -46,7 +46,7 @@ our @actions =
         'requires' => \&create_sequence_requires, 
         'provides' => \&create_sequence_provides,
     },
-    # TODO: sort out error while running glimmerwith run-pipeline
+    # TODO: sort out error while running glimmer with run-pipeline
     # {
     #     'name'     => 'run_glimmer3',
     #     'action'   => \&run_glimmer3,
@@ -78,16 +78,16 @@ our @actions =
         'provides' => \&run_repeatscout_provides,
     },
     {
-        'name'     => 'create_seq_chunks',
-        'action'   => \&create_seq_chunks,
-        'requires' => \&create_seq_chunks_requires, 
-        'provides' => \&create_seq_chunks_provides,
-    },
-    {
         'name'     => 'run_alienhunter',
         'action'   => \&run_alienhunter,
         'requires' => \&run_alienhunter_requires, 
         'provides' => \&run_alienhunter_provides,
+    },
+    {
+        'name'     => 'create_seq_chunks',
+        'action'   => \&create_seq_chunks,
+        'requires' => \&create_seq_chunks_requires, 
+        'provides' => \&create_seq_chunks_provides,
     },
     # TODO: sort out LSF package to work for job array and dependencies
     # {
@@ -143,7 +143,7 @@ our $options =
     'repeatmasker_exec'    => '/software/pubseq/bin/RepeatMasker',
     'repeat2tab_exec'      => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/repeat2tab.py',
 
-    'alienhunter_exec'     => '/nfs/users/nfs_a/ap12/tmp/alien_hunter/alien_hunter',
+    'alienhunter_exec'     => '/nfs/users/nfs_a/ap12/lib/alien_hunter/alien_hunter',
 
     'rnammer_exec'         => '/nfs/users/nfs_a/ap12/lib/rnammer-1.2/rnammer',
     'rnammer2tab_exec'     => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/rnammer2tab.py',
@@ -154,6 +154,8 @@ our $options =
     'bsub_opts'            => '-q normal',
     'bsub_long_opts'       => '-q long',
     'bsub_array_opts'      => '',
+    'bsub_mem'             => '2500',
+    'bsub_lqueue'          => 'long',
 };
 
 
@@ -370,7 +372,7 @@ if ( ! -s "$$self{common_name}.predict" ) {
 }
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_g3", $self, "$$self{perl_loc}/perl -w _glimmer3.pl");
+    LSF::run($lock_file, $path, "_$$self{common_name}_g3", {bsub_opts=>$$self{bsub_opts}}, "$$self{perl_loc}/perl -w _glimmer3.pl");
 
     return $$self{'No'};
 }
@@ -523,7 +525,7 @@ if ( ! -s "$$self{sequence}.out" ) {
 }
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_repeatscout", $self, "$$self{perl_loc}/perl -w _repeatscout.pl");
+    LSF::run($lock_file, $path, "_$$self{common_name}_repeatscout", {memory=>$$self{bsub_mem}}, "$$self{perl_loc}/perl -w _repeatscout.pl");
 
     return $$self{'No'};
 }
@@ -739,7 +741,7 @@ if ( ! -s "$$self{common_name}.alienhunter.tab" ) {
 }
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_alienhunter", {bsub_opts=>$$self{bsub_opts}}, "$$self{perl_loc}/perl -w _alienhunter.pl");
+    LSF::run($lock_file, $path, "_$$self{common_name}_alienhunter", {bsub_opts=>'-q long -M2500000 -R"select[mem>2500] rusage[mem=2500]"'}, "$$self{perl_loc}/perl -w _alienhunter.pl");
 
     return $$self{'No'};
 }

@@ -110,8 +110,8 @@ our $options =
     'pfamscan_exec'        => '/software/pathogen/external/applications/pfam_scan/bin/pfam_scan.pl',
     'pfam_dir'             => '/data/blastdb',
     'pfam2embl_exec'       => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/pfam2embl.py',
-    'pfam2go'              => '/nfs/users/nfs_a/ap12/tmp/go/pfam2go',
-    'go_map'               => '/nfs/users/nfs_a/ap12/tmp/go/map',
+    'pfam2go'              => '/nfs/users/nfs_a/ap12/lib/go/pfam2go',
+    'go_map'               => '/nfs/users/nfs_a/ap12/lib/go/map',
 
     'bsub_opts'            => '-q normal',
     'bsub_long_opts'       => '-q long',
