@@ -85,7 +85,7 @@ def isSoftInstalled(softname):
 
 ### ---------------------------------------------------------------------------
 def main():
-    print "checking dependencies..."
+    print "Checking dependencies..."
     not_found = 0
     for softname, location in DEPENDENCIES.iteritems():
         if not os.path.exists(location):

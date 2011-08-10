@@ -26,7 +26,7 @@ run-pipeline -c pipeline.conf -o -v -v
 
 =cut
 
-package PathTrack::GeneFunction;
+package Pathogens::Annotate::GeneFunction;
 use base qw(VertRes::Pipeline);
 
 use strict;

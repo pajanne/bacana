@@ -12,7 +12,7 @@ import sys, os
 
 GFIND_TEMPLATE = """
 root    => '%(root)s/%(common_name)s',
-module  => 'PathTrack::GeneFinding',
+module  => 'Pathogens::Annotate::GeneFinding',
 prefix  => '_',
 log	=> '%(root)s/log/%(common_name)s.log',
 
@@ -25,7 +25,7 @@ data => {
 
 GFUNC_TEMPLATE = """
 root    => '%(root)s/%(common_name)s',
-module  => 'PathTrack::GeneFunction',
+module  => 'Pathogens::Annotate::GeneFunction',
 prefix  => '_',
 log	=> '%(root)s/log/%(common_name)s.log',
 
@@ -48,6 +48,8 @@ def main():
     if not (options.root and options.name and options.file):
         parser.print_help()
         sys.exit()
+
+    print "Generating config files..."
 
     # check root path
     if not os.path.exists(options.root):
@@ -75,7 +77,6 @@ def main():
         conf_file = open(conf_filename, 'a')  # in append mode if file already exists
     else:
         conf_file = open(conf_filename, 'w')
-    print "%s\t%s" % (options.name, options.file)
 
     # create gene finding config file
     gfind_conf_filename = '%s/conf/%s_gfind.conf' % (options.root, options.name)
@@ -83,6 +84,7 @@ def main():
     gfind_conf_file.write(GFIND_TEMPLATE % {'root':options.root,
                                             'common_name':options.name,
                                             'fasta_file':options.file})
+    print "config file: %s" % gfind_conf_filename
     gfind_conf_file.close()
     
     # create gene function config file
@@ -90,11 +92,16 @@ def main():
     gfunc_conf_file = open(gfunc_conf_filename, 'w')
     gfunc_conf_file.write(GFUNC_TEMPLATE % {'root':options.root,
                                             'common_name':options.name})
+    print "config file: %s" % gfunc_conf_filename
     gfunc_conf_file.close()
     
     conf_file.write('GFIND\t%s\n' % gfind_conf_filename)
     conf_file.write('GFUNC\t%s\n' % gfunc_conf_filename)
+
+    print "config file: %s appended" % conf_filename
     conf_file.close()
+    
+    print "generated for {%s, %s}" % (options.name, options.file)
     
 ### ---------------------------------------------------------------------------
 if __name__ == '__main__':
