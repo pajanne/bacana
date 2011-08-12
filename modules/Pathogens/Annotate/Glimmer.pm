@@ -49,10 +49,6 @@ sub new
     # check required options are provided
     $self->throw("Missing fasta option in config.\n") unless $self->{fasta};
     $self->throw("Missing common_name option in config.\n") unless $self->{common_name};
-    $self->{lc_common_name} = lc($$self{common_name});
-
-    # set sequence
-    $self->{sequence} = 'sequence.fna';
 
     return $self;
 }
@@ -81,9 +77,6 @@ sub run_glimmer3
 {
     my ($self, $path, $lock_file) = @_;
 
-    # create symlink to fasta file
-    Utils::relative_symlink($$self{fasta}, $path . '/' . $$self{sequence}); 
-
     # dynamic script to be run by LSF
     open(my $fh,'>', "$path/_glimmer3.pl") or Utils::error("$path/_glimmer3.pl: $!");
     print $fh
@@ -93,33 +86,33 @@ use warnings;
 use Utils;
 
 # run glimmer3
-Utils::CMD("$$self{glimmer3_exec} $$self{sequence} $$self{common_name}");
+Utils::CMD("$$self{glimmer3_exec} $$self{fasta} $$self{common_name} >  _glimmer3_cmd.log", {'verbose'=>1, 'time'=>1});
+
+# if no result file, create one 
 if ( ! -s "$$self{common_name}.predict" ) { 
-    Utils::error("The command ended with an error:\\n\\t$$self{glimmer3_exec} $$self{sequence} $$self{common_name}\\n");
-} else {
-    # Tidy-up
-    unlink("$$self{common_name}.longorfs");
-    unlink("$$self{common_name}.train");
-    unlink("$$self{common_name}.icm");
-    unlink("$$self{common_name}.run1.detail");
-    unlink("$$self{common_name}.run1.predict");
-    unlink("$$self{common_name}.coords");
-    unlink("$$self{common_name}.upstream");
-    unlink("$$self{common_name}.motif");
-    unlink("$$self{common_name}.detail");
-
-    # Convert glimmer3 results into EMBL feature table
-    Utils::CMD("python $$self{glimmer2tab_exec} -i $$self{common_name}.predict -o $$self{common_name}.g3.tab");
-    if ( ! -s "$$self{common_name}.g3.tab" ) { 
-        Utils::error("The command ended with an error:\\n\\tpython $$self{glimmer2tab_exec} -i $$self{common_name}.predict -o $$self{common_name}.g3.tab\\n");
-    }
-
-    # Tidy-up
-    unlink("$$self{common_name}.predict");
+    Utils::CMD("touch $$self{common_name}.predict");
 }
+
+# Tidy-up
+unlink("$$self{common_name}.longorfs");
+unlink("$$self{common_name}.train");
+unlink("$$self{common_name}.icm");
+unlink("$$self{common_name}.run1.detail");
+unlink("$$self{common_name}.run1.predict");
+unlink("$$self{common_name}.coords");
+unlink("$$self{common_name}.upstream");
+unlink("$$self{common_name}.motif");
+unlink("$$self{common_name}.detail");
+
+# Convert glimmer3 results into EMBL feature table
+Utils::CMD("python $$self{glimmer2tab_exec} -i $$self{common_name}.predict -o $$self{common_name}.g3.tab", {'verbose'=>1, 'time'=>1});
+
+# Tidy-up
+unlink("$$self{common_name}.predict");
+
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_g3", {bsub_opts=>$$self{bsub_opts}}, "perl -w _glimmer3.pl");
+    LSF::run($lock_file, $path, "_glimmer3_bsub", {bsub_opts=>$$self{bsub_opts}}, "perl -w _glimmer3.pl");
 
     return $$self{'No'};
 }

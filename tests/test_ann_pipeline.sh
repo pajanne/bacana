@@ -57,6 +57,7 @@ fi
 # checking script directory
 #
 SCRIPT_DIR=`dirname $(readlink -f $0)`
+DATA_DIR=`dirname $(readlink -f "${SCRIPT_DIR}/")`
 cd $SCRIPT_DIR
 echo "Executing test script at $SCRIPT_DIR"
 
@@ -81,7 +82,7 @@ then
     echo "Removing existing configuration file $CONF_FILE"
     rm -f $TEST_DIR/$CONF_FILE
 fi
-python ../scripts/generate_config_file.py -n test -f  $SCRIPT_DIR/../data/sequence.fna -r $TEST_DIR -c $CONF_FILE
+python ../scripts/generate_config_file.py -n test -f  $DATA_DIR/data/sequence.fna -r $TEST_DIR -c $CONF_FILE
 
 #
 # running the pipeline
