@@ -29,8 +29,8 @@ our @actions =
 our $options = 
 {
     # Executables
-    'rnammer_exec'         => '/nfs/users/nfs_a/ap12/lib/rnammer-1.2/rnammer',
-    'rnammer2tab_exec'     => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/rnammer2tab.py',
+    'rnammer_exec'         => 'rnammer',
+    'rnammer2tab_exec'     => 'rnammer2tab.py',
 
     # LSF options
     'bsub_opts'            => '-q normal',
@@ -48,10 +48,6 @@ sub new
     # check required options are provided
     $self->throw("Missing fasta option in config.\n") unless $self->{fasta};
     $self->throw("Missing common_name option in config.\n") unless $self->{common_name};
-    $self->{lc_common_name} = lc($$self{common_name});
-
-    # set sequence
-    $self->{sequence} = 'sequence.fna';
 
     return $self;
 }
@@ -80,9 +76,6 @@ sub run_rnammer
 {
     my ($self, $path, $lock_file) = @_;
 
-    # create symlink to fasta file
-    Utils::relative_symlink($$self{fasta}, $path . '/' . $$self{sequence}); 
-
     # dynamic script to be run by LSF
     open(my $fh,'>', "$path/_rnammer.pl") or Utils::error("$path/_rnammer.pl: $!");
     print $fh
@@ -92,19 +85,19 @@ use warnings;
 use Utils;
 
 # run rnammer
-Utils::CMD("$$self{rnammer_exec} -S bac -gff $$self{common_name}.rnammer.gff < $$self{sequence}");
-if ( ! -s "$$self{common_name}.rnammer.gff" ) { 
-    Utils::error("The command ended with an error:\\n\\t$$self{rnammer_exec} -S bac -gff $$self{common_name}.rnammer.gff < $$self{sequence}\\n");
-} else {
-    # Convert rnammer results into EMBL feature table
-    Utils::CMD("python $$self{rnammer2tab_exec} -i $$self{common_name}.rnammer.gff -o $$self{common_name}.rnammer.tab");
-    if ( ! -s "$$self{common_name}.rnammer.tab" ) { 
-        Utils::error("The command ended with an error:\\n\\tpython $$self{rnammer2tab_exec} -i $$self{common_name}.rnammer.gff -o $$self{common_name}.rnammer.tab\\n");
-    }
+Utils::CMD("$$self{rnammer_exec} -S bac -gff $$self{common_name}.rnammer.gff < $$self{fasta}");
 
-    # Tidy-up
-    unlink("$$self{common_name}.rnammer.gff");
-}
+# if no result file, create one to stop the pipeline running
+if ( ! -s "$$self{common_name}.rnammer.gff" ) { 
+     Utils::CMD("touch $$self{common_name}.rnammer.gff");
+} 
+
+# Convert rnammer results into EMBL feature table
+Utils::CMD("$$self{rnammer2tab_exec} -i $$self{common_name}.rnammer.gff -o $$self{common_name}.rnammer.tab");
+
+# Tidy-up
+unlink("$$self{common_name}.rnammer.gff");
+
 ];
     close($fh);
     LSF::run($lock_file, $path, "_$$self{common_name}_rnammer", {bsub_opts=>$$self{bsub_opts}}, "perl -w _rnammer.pl");

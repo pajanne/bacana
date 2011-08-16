@@ -30,8 +30,8 @@ our @actions =
 our $options = 
 {
     # Executables
-    'glimmer3_exec'        => '/software/pathogen/external/applications/glimmer/glimmer/scripts/g3-iterated.csh',
-    'glimmer2tab_exec'     => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/glimmer2tab.py',
+    'glimmer3_exec'        => 'g3-iterated.csh',
+    'glimmer2tab_exec'     => 'glimmer2tab.py',
 
     # LSF options
     'bsub_opts'            => '-q normal',
@@ -86,7 +86,7 @@ use warnings;
 use Utils;
 
 # run glimmer3
-Utils::CMD("$$self{glimmer3_exec} $$self{fasta} $$self{common_name} >  _glimmer3_cmd.log", {'verbose'=>1, 'time'=>1});
+Utils::CMD("$$self{glimmer3_exec} $$self{fasta} $$self{common_name} >& _glimmer3_cmd.log", {'verbose'=>1, 'time'=>1});
 
 # if no result file, create one 
 if ( ! -s "$$self{common_name}.predict" ) { 
@@ -105,7 +105,7 @@ unlink("$$self{common_name}.motif");
 unlink("$$self{common_name}.detail");
 
 # Convert glimmer3 results into EMBL feature table
-Utils::CMD("python $$self{glimmer2tab_exec} -i $$self{common_name}.predict -o $$self{common_name}.g3.tab", {'verbose'=>1, 'time'=>1});
+Utils::CMD("$$self{glimmer2tab_exec} -i $$self{common_name}.predict -o $$self{common_name}.g3.tab", {'verbose'=>1, 'time'=>1});
 
 # Tidy-up
 unlink("$$self{common_name}.predict");

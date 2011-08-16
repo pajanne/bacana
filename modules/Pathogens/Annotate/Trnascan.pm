@@ -93,7 +93,7 @@ if ( ! -s "$$self{common_name}.trnascan" ) {
 }
 
 # convert trnascan results into EMBL feature table
-Utils::CMD("python $$self{trnascan2tab_exec} -i $$self{common_name}.trnascan -o $$self{common_name}.trnascan.tab", {'verbose'=>1, 'time'=>1});
+Utils::CMD("$$self{trnascan2tab_exec} -i $$self{common_name}.trnascan -o $$self{common_name}.trnascan.tab", {'verbose'=>1, 'time'=>1});
 
 # Tidy-up
 unlink("$$self{common_name}.trnascan");

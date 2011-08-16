@@ -30,8 +30,8 @@ our @actions =
 
 our $options = 
 {
-    'prodigal_exec'        => '/software/pathogen/external/bin/prodigal',
-    'prodigal2tab_exec'    => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/prodigal2tab.py',
+    'prodigal_exec'        => 'prodigal',
+    'prodigal2tab_exec'    => 'prodigal2tab.py',
 
 };
 
@@ -47,10 +47,6 @@ sub new
     # check required options are provided
     $self->throw("Missing fasta option in config.\n") unless $self->{fasta};
     $self->throw("Missing common_name option in config.\n") unless $self->{common_name};
-    $self->{lc_common_name} = lc($$self{common_name});
-
-    # set sequence
-    $self->{sequence} = 'sequence.fna';
 
     return $self;
 }
@@ -79,9 +75,6 @@ sub run_prodigal
 {
     my ($self, $path, $lock_file) = @_;
 
-    # create symlink to fasta file
-    Utils::relative_symlink($$self{fasta}, $path . '/' . $$self{sequence}); 
-
     # dynamic script to be run by LSF
     open(my $fh,'>', "$path/_prodigal.pl") or Utils::error("$path/_prodigal.pl: $!");
     print $fh
@@ -91,19 +84,19 @@ use warnings;
 use Utils;
 
 # run prodigal
-Utils::CMD("$$self{prodigal_exec} < $$self{sequence} > $$self{common_name}.prodigal");
-if ( ! -s "$$self{common_name}.prodigal" ) { 
-    Utils::error("The command ended with an error:\\n\\t$$self{prodigal_exec} < $$self{sequence} > $$self{common_name}.prodigal\\n");
-} else {
-    # Convert prodigal results into EMBL feature table
-    Utils::CMD("python $$self{prodigal2tab_exec} -i $$self{common_name}.prodigal -o $$self{common_name}.prodigal.tab");
-    if ( ! -s "$$self{common_name}.prodigal.tab" ) { 
-        Utils::error("The command ended with an error:\\n\\tpython $$self{prodigal2tab_exec} -i $$self{common_name}.prodigal -o $$self{common_name}.prodigal.tab\\n");
-    }
+Utils::CMD("$$self{prodigal_exec} < $$self{fasta} > $$self{common_name}.prodigal");
 
-    # Tidy-up
-    unlink("$$self{common_name}.prodigal");
+# if no result file, create one to stop the pipeline running
+if ( ! -s "$$self{common_name}.prodigal" ) { 
+    Utils::CMD("touch $$self{common_name}.prodigal");
 }
+
+# Convert prodigal results into EMBL feature table
+Utils::CMD("$$self{prodigal2tab_exec} -i $$self{common_name}.prodigal -o $$self{common_name}.prodigal.tab");
+
+# Tidy-up
+unlink("$$self{common_name}.prodigal");
+
 ];
     close($fh);
     LSF::run($lock_file, $path, "_$$self{common_name}_prodigal", $self, "perl -w _prodigal.pl");

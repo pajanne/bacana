@@ -29,7 +29,7 @@ our @actions =
 our $options = 
 {
     # Executables
-    'alienhunter_exec'     => '/nfs/users/nfs_a/ap12/lib/alien_hunter/alien_hunter',
+    'alienhunter_exec'     => 'alien_hunter',
 
     # LSF options
     'bsub_opts'            => '-q long -M2500000 -R"select[mem>2500] rusage[mem=2500]"',

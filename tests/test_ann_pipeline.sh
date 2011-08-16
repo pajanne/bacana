@@ -71,7 +71,7 @@ echo "Sourced setup environment $SETUP_SCRIPT"
 #
 # checking dependencies
 #
-python ../scripts/check_dependencies.py
+../scripts/check_dependencies.py
 
 #
 # generating config files
@@ -82,7 +82,7 @@ then
     echo "Removing existing configuration file $CONF_FILE"
     rm -f $TEST_DIR/$CONF_FILE
 fi
-python ../scripts/generate_config_file.py -n test -f  $DATA_DIR/data/sequence.fna -r $TEST_DIR -c $CONF_FILE
+../scripts/generate_config_file.py -n test -f  $DATA_DIR/data/sequence.fna -r $TEST_DIR -c $CONF_FILE
 
 #
 # running the pipeline
