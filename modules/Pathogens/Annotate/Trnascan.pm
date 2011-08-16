@@ -29,8 +29,8 @@ our @actions =
 our $options = 
 {
     # Executables
-    'trnascan_exec'        => '/software/pathogen/external/bin/tRNAscan-SE',
-    'trnascan2tab_exec'    => '/nfs/users/nfs_a/ap12/genlibpy/genepy/convertors/trnascan2tab.py',
+    'trnascan_exec'        => 'tRNAscan-SE',
+    'trnascan2tab_exec'    => 'trnascan2tab.py',
 
     # LSF options
     'bsub_opts'            => '-q long',
