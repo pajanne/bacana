@@ -85,7 +85,7 @@ use warnings;
 use Utils;
 
 # run trnascan
-Utils::CMD("$$self{trnascan_exec} -P -o $$self{common_name}.trnascan -q -b -Q -C $$self{fasta} > _trnascan_cmd.log", {'verbose'=>1, 'time'=>1});
+Utils::CMD("$$self{trnascan_exec} -o $$self{common_name}.trnascan -B -C -Q $$self{fasta}", {'verbose'=>1, 'time'=>1});
 
 # if no result file, create one
 if ( ! -s "$$self{common_name}.trnascan" ) { 
@@ -100,7 +100,7 @@ unlink("$$self{common_name}.trnascan");
 
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_trnascan_bsub", {bsub_opts=>$$self{bsub_opts}}, "perl -w _trnascan.pl");
+    LSF::run($lock_file, $path, "_trnascan_bsub", $self, qq[perl -w _trnascan.pl]);
 
     return $$self{'No'};
 }

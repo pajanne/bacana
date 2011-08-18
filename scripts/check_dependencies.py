@@ -40,7 +40,7 @@ DEPENDENCIES = {
 
     'alienhunter_exec'     : 'alien_hunter',
 
-    #'merger_exec'          : '/nfs/users/nfs_a/ap12/genlibpy/genepy/pathtrack/gfind_merger.py',
+    'merger_exec'          : 'gfind_merger.py',
 
     #'rfamscan_exec'        : '/software/pathogen/psu_svn/trunk/genexec/perl/src/rfam_scan.pl',
     #'cm_file'              : '/lustre/scratch101/blastdb/Rfam/Rfam_9.1/Rfam.cm',

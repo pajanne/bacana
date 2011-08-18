@@ -112,7 +112,7 @@ unlink("$$self{common_name}.predict");
 
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_glimmer3_bsub", {bsub_opts=>$$self{bsub_opts}}, "perl -w _glimmer3.pl");
+    LSF::run($lock_file, $path, "_glimmer3_bsub", {bsub_opts=>$$self{bsub_opts}}, qq[perl -w _glimmer3.pl]);
 
     return $$self{'No'};
 }

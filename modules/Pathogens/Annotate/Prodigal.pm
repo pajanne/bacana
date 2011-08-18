@@ -84,7 +84,7 @@ use warnings;
 use Utils;
 
 # run prodigal
-Utils::CMD("$$self{prodigal_exec} < $$self{fasta} > $$self{common_name}.prodigal");
+Utils::CMD("$$self{prodigal_exec} < $$self{fasta} > $$self{common_name}.prodigal", {'verbose'=>1, 'time'=>1});
 
 # if no result file, create one to stop the pipeline running
 if ( ! -s "$$self{common_name}.prodigal" ) { 
@@ -92,14 +92,14 @@ if ( ! -s "$$self{common_name}.prodigal" ) {
 }
 
 # Convert prodigal results into EMBL feature table
-Utils::CMD("$$self{prodigal2tab_exec} -i $$self{common_name}.prodigal -o $$self{common_name}.prodigal.tab");
+Utils::CMD("$$self{prodigal2tab_exec} -i $$self{common_name}.prodigal -o $$self{common_name}.prodigal.tab", {'verbose'=>1, 'time'=>1});
 
 # Tidy-up
 unlink("$$self{common_name}.prodigal");
 
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_prodigal", $self, "perl -w _prodigal.pl");
+    LSF::run($lock_file, $path, "_$$self{common_name}_prodigal", $self, qq[perl -w _prodigal.pl]);
 
     return $$self{'No'};
 }

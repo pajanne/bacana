@@ -23,11 +23,13 @@ export XLSF_UIDDIR=/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/uid
 export LD_LIBRARY_PATH=/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib:$LD_LIBRARY_PATH
 
 ### ----------------------------------------------------------------------------
+alias python=/software/bin/python-2.7
 # Set up python environment
 export PYTHONPATH=/nfs/users/nfs_a/ap12/lib/gdata-2.0.10/lib/python
-export PYTHONPATH=$PYTHONPATH:/nfs/users/nfs_a/ap12/genlibpy
-export PYTHONPATH=$PYTHONPATH:/software/pathogen/external/lib/python2.6/site-packages/
-export PYTHONPATH=$PYTHONPATH:/software/pathogen/psu_svn/trunk/genlib/python
+#export PYTHONPATH=$PYTHONPATH:/nfs/users/nfs_a/ap12/genlibpy
+export PYTHONPATH=$PYTHONPATH:/nfs/users/nfs_a/ap12/lib/biopython-1.58/lib/python
+export PYTHONPATH=$PYTHONPATH:/software/pathogen/external/lib/python2.7/site-packages/
+#export PYTHONPATH=$PYTHONPATH:/software/pathogen/psu_svn/trunk/genlib/python
 
 # Proxy setting for gdata python api
 export http_proxy="http://wwwcache.sanger.ac.uk:3128"
@@ -36,6 +38,7 @@ export https_proxy="https://wwwcache.sanger.ac.uk:3128"
 ### ----------------------------------------------------------------------------
 # Set up perl environment
 export PERL_INLINE_DIRECTORY=/nfs/users/nfs_p/pathpipe/_Inline
+export PERLDOC_PAGER=less
 export PERL5LIB=/software/vertres/lib/all
 export PERL5LIB=$PERL5LIB:$VR_CODEBASE/modules
 export PERL5LIB=$PERL5LIB:$ANN_PIPELINE/modules
@@ -48,7 +51,8 @@ export PERL5LIB=$PERL5LIB:/software/pathogen/external/apps/usr/local/lib
 export PERL5LIB=$PERL5LIB:/software/pathogen/external/apps/usr/lib
 export PERL5LIB=$PERL5LIB:/software/pathogen/lib/lib/site_perl/5.8.8/x86_64-linux-thread-multi
 export PERL5LIB=$PERL5LIB:/software/pathogen/lib/lib/site_perl/5.8.8
-export PERLDOC_PAGER=less
+# Specific for annotation pipeline
+#export PERL5LIB=$PERL5LIB:/software/pathogen/external/apps/usr/local/tRNAscan-SE-1.3/
 
 ### ----------------------------------------------------------------------------
 # Set up PATH
@@ -67,12 +71,13 @@ export PATH=$PATH:/software/pathogen/external/apps/usr/local/bin
 export PATH=$PATH:/software/pathogen/external/apps/usr/local/sbin
 export PATH=$PATH:/software/pathogen/external/apps/sbin
 export PATH=$PATH:/software/vertres/bin-external/
-# For annotation pipeline
+# Specific for annotation pipeline
 export PATH=$PATH:$ANN_PIPELINE/scripts
 export PATH=$PATH:/software/pathogen/external/applications/glimmer/glimmer/scripts/ # g3-iterated.csh 
-export PATH=$PATH:/software/pathogen/external/bin/ # prodigal
+export PATH=/software/pathogen/external/bin/:$PATH # prodigal & tRNAscan-SE
 export PATH=$PATH:/nfs/users/nfs_a/ap12/lib/rnammer-1.2/ # rnammer
 export PATH=$PATH:/software/pubseq/bin/ # RepeatMasker
 export PATH=$PATH:/nfs/users/nfs_a/ap12/lib/alien_hunter/ # alien_hunter
+#export PATH=$PATH:/software/pathogen/external/apps/usr/local/tRNAscan-SE-1.3/ # tRNAscan-SE
 ### ----------------------------------------------------------------------------
 

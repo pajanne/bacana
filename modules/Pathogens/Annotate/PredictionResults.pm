@@ -1,12 +1,14 @@
 =head1 NAME
 
-Pathogens::Annotate::Rnammer
+Pathogens::Annotate::PredictionResults
 
 =head1 SYNOPSIS
 
+Pipeline step for merging results of gene prediction steps, inherits from VertRes::Pipelines.
+
 =cut
 
-package Pathogens::Annotate::Rnammer;
+package Pathogens::Annotate::PredictionResults;
 use base qw(VertRes::Pipeline);
 
 use strict;
@@ -19,18 +21,17 @@ use VertRes::Utils::FileSystem;
 our @actions =
 (
     {
-        'name'     => 'run_rnammer',
-        'action'   => \&run_rnammer,
-        'requires' => \&run_rnammer_requires, 
-        'provides' => \&run_rnammer_provides,
+        'name'     => 'run_cds_merger',
+        'action'   => \&run_cds_merger,
+        'requires' => \&run_cds_merger_requires, 
+        'provides' => \&run_cds_merger_provides,
     },
 );
 
 our $options = 
 {
     # Executables
-    'rnammer_exec'         => 'rnammer',
-    'rnammer2tab_exec'     => 'rnammer2tab.py',
+    'merger_exec'          => 'gfind_merger.py',
 
     # LSF options
     'bsub_opts'            => '-q normal',
@@ -49,61 +50,57 @@ sub new
     $self->throw("Missing fasta option in config.\n") unless $self->{fasta};
     $self->throw("Missing common_name option in config.\n") unless $self->{common_name};
 
+    # set embl result file
+    $self->{embl} = $$self{common_name} . '.embl';
+
     return $self;
 }
 
 
+
 ### ---------------------------------------------------------------------------
-### run_rnammer
+### run_cds_merger
 ### ---------------------------------------------------------------------------
-sub run_rnammer_requires
+sub run_cds_merger_requires
 {
     my ($self) = @_;
     my @requires;
     push(@requires, "$$self{fasta}");
+    push(@requires, "../prodigal/$$self{common_name}.prodigal.tab");
+    push(@requires, "../glimmer/$$self{common_name}.g3.tab");
     return \@requires;
 }
 
-sub run_rnammer_provides
+sub run_cds_merger_provides
 {
     my ($self) = @_;
     my @provides;
-    push(@provides, "$$self{common_name}.rnammer.tab");
+    push(@provides, "$$self{embl}");
     return \@provides;
 }
 
-sub run_rnammer
+sub run_cds_merger
 {
     my ($self, $path, $lock_file) = @_;
 
     # dynamic script to be run by LSF
-    open(my $fh,'>', "$path/_rnammer.pl") or Utils::error("$path/_rnammer.pl: $!");
+    open(my $fh,'>', "$path/_merger.pl") or Utils::error("$path/_merger.pl: $!");
     print $fh
 qq[
 use strict;
 use warnings;
 use Utils;
 
-# run rnammer
-Utils::CMD("$$self{rnammer_exec} -S bac -gff $$self{common_name}.rnammer.gff < $$self{fasta}", {'verbose'=>1, 'time'=>1});
-
-# if no result file, create one to stop the pipeline running
-if ( ! -s "$$self{common_name}.rnammer.gff" ) { 
-     Utils::CMD("touch $$self{common_name}.rnammer.gff");
-} 
-
-# Convert rnammer results into EMBL feature table
-Utils::CMD("$$self{rnammer2tab_exec} -i $$self{common_name}.rnammer.gff -o $$self{common_name}.rnammer.tab", {'verbose'=>1, 'time'=>1});
-
-# Tidy-up
-unlink("$$self{common_name}.rnammer.gff");
+# run merger to create EMBL file
+Utils::CMD("$$self{merger_exec} -s $$self{fasta} -p ../prodigal/$$self{common_name}.prodigal.tab -g ../glimmer/$$self{common_name}.g3.tab -o $$self{embl} -n $$self{common_name} -l XXX", {'verbose'=>1, 'time'=>1});
 
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_rnammer", {bsub_opts=>$$self{bsub_opts}}, qq[perl -w _rnammer.pl]);
+    LSF::run($lock_file, $path, "_$$self{common_name}_merger", $self, qq[perl -w _merger.pl]);
 
     return $$self{'No'};
 }
+
 
 1;
 

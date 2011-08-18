@@ -149,7 +149,7 @@ unlink("$$self{sequence}.tbl");
 
 ];
     close($fh);
-    LSF::run($lock_file, $path, "_$$self{common_name}_repeatscout", {bsub_opts=>$$self{bsub_opts}}, "perl -w _repeatscout.pl");
+    LSF::run($lock_file, $path, "_$$self{common_name}_repeatscout", {bsub_opts=>$$self{bsub_opts}}, qq[perl -w _repeatscout.pl]);
 
     return $$self{'No'};
 }
