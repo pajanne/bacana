@@ -23,7 +23,7 @@ data => {
 },
 
 """
-GFIND_STEPS = ['Glimmer', 'Prodigal', 'Rnammer', 'Trnascan', 'RepeatScout', 'AlienHunter', 'PredictionResults']
+GFIND_STEPS = ['Glimmer', 'Prodigal', 'Rnammer', 'Trnascan', 'RepeatScout', 'AlienHunter', 'Results']
 
 GFUNC_TEMPLATE = """
 root    => '%(root)s/%(common_name)s',

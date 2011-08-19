@@ -22,34 +22,12 @@ features = []
 ### Main methods 
 ### ---------------------------------------------------------------------------
 def getRecordFromSeq(single_fasta_file, organism_name):
-    # read FASTA sequence file 
-    ## records = SeqIO.parse(open(fasta_file), "fasta")
-    ## new_seq = ''
-    ## gap_count = 0
-    ## for record in records:
-    ##     # Add 50 N between scaffolds, but not at the beginning
-    ##     if new_seq == '':
-    ##         new_seq = "%sNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" % (record.seq)
-    ##     else:
-    ##         new_seq = "%sNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN%s" % (new_seq, record.seq)
-    ##     # Add scaffold gaps
-    ##     start_N = len(new_seq)
-    ##     end_N = start_N + 50
-    ##     gap_feature = SeqFeature(FeatureLocation(start_N, end_N), strand=1, type="gap")
-    ##     gap_feature.qualifiers['estimated_length'] = ['50']
-    ##     gap_feature.qualifiers['note'] = ['scaffold gap']
-    ##     features.append(gap_feature)
-    ##     gap_count += 1
-        
-    ## new_record = SeqRecord(Seq(new_seq, generic_dna), id=organism_name)
-    ## new_record.seq.alphabet = generic_dna
-    ## print new_record
-    ## print "INFO: %s scaffold gap features added" % gap_count
-    ## return new_record
-
-    # read FASTA sequence containing one and only one sequence.
+    # read FASTA sequence containing one and only one sequence
     # If there are no sequence, or more than one, then an exception is raised
-    new_record = SeqIO.read(open(single_fasta_file), "fasta")
+    try:
+        new_record = SeqIO.read(open(single_fasta_file), "fasta")
+    except ValueError, e:
+        print "ValueError: %s" % e
     new_record.seq.alphabet = generic_dna
     return new_record
 
@@ -97,32 +75,6 @@ FT                   /method="PRODIGAL"
     print "INFO: %s CDS features added from %s" % (cds_count, method)
 
     
-### ---------------------------------------------------------------------------
-def addGaps(record):
-    seq = record.seq
-    in_N = False
-    # TODO - Cope with a sequence which ends with N
-    if seq[-1] == "N":
-        print "WARNING: sequence ends with N"
-    else:
-        for i in range(len(seq)):
-            if seq[i] == 'N' and not in_N:
-                start_N = i
-                in_N = True
-            if in_N and not seq[i+1] == 'N':
-                end_N = i + 1
-                length = end_N - start_N
-                assert length > 0
-                assert str(seq[start_N:end_N]) == "N"*length
-                # do not create FT for 1bp gap
-                if length > 1:
-                    gap_feature = SeqFeature(FeatureLocation(start_N, end_N), strand=1, type="gap")
-                    gap_feature.qualifiers['estimated_length'] = [length]
-                    gap_feature.qualifiers['note'] = ['contig gap']
-                    features.append(gap_feature)
-                in_N = False
-
-
 ### ---------------------------------------------------------------------------
 def mergeFeatures(record):
     # Total number of features
@@ -306,6 +258,8 @@ def doRun():
     # Create record from FASTA sequence file
     if os.path.exists(options.seq):
         record = getRecordFromSeq(options.seq, options.name)
+    else:
+        print "Fasta file %s not found" % options.seq
     # Read CDSs feature tables
     if os.path.exists(options.prodigal):
         populateFeatures(options.prodigal, 'PRODIGAL')
@@ -315,8 +269,6 @@ def doRun():
         populateFeatures(options.glimmer, 'GLIMMER3')
     else:
          print "Glimmer3 file %s not found" % options.glimmer
-    # Add gap features
-    #addGaps(record)
     # Modify features - remove duplicates
     mergeFeatures(record)
     # Add locus_tag

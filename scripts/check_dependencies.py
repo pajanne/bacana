@@ -41,6 +41,7 @@ DEPENDENCIES = {
     'alienhunter_exec'     : 'alien_hunter',
 
     'merger_exec'          : 'gfind_merger.py',
+    'converter_exec'       : 'addft2embl.py',
 
     #'rfamscan_exec'        : '/software/pathogen/psu_svn/trunk/genexec/perl/src/rfam_scan.pl',
     #'cm_file'              : '/lustre/scratch101/blastdb/Rfam/Rfam_9.1/Rfam.cm',
