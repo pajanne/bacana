@@ -1,63 +1,44 @@
-/nfs/repository/d0029/E_sp_7L76/E_sp_7L76.fasta
-/nfs/repository/d0029/M_hypermegale_ART121/M_hypermegale_ART121.fasta
-/nfs/repository/d0029/B_xylanisolvens_XB1A/B_xylanisolvens_XB1A.fasta
-/nfs/repository/d0029/E_siraem_703/E_siraem_703.fasta
-/nfs/repository/d0029/R_sp_SR15/R_sp_SR15.fasta
-/nfs/repository/d0029/R_bromii_L263/R_bromii_L263.fasta
-/nfs/repository/d0029/B_longum/B_longum.fasta
-/nfs/repository/d0029/S_sp_SGP1/S_sp_SGP1.fasta
-/nfs/repository/d0029/E_hallii_SM61/E_hallii_SM61.fasta
-/nfs/repository/d0029/U_sp_ss34/U_sp_ss34.fasta
-/nfs/repository/d0029/F_prausnitzii_SL33/F_prausnitzii_L26.fasta
-/nfs/repository/d0029/E_siraeum_V10Sc8a/E_siraeum_V10Sc8a.fasta
-/nfs/repository/d0029/B_pseudocatenulatum_D2CA/
-
-! FASTA FILE EXITS
-!/nfs/repository/d0029/R_sp_18P13/R_sp_18P13.cons
-!/nfs/repository/d0029/E_cloacae_NCTC9394/combined_assembly/gap4/E_cloacae_NCTC9394.fasta 
-!/nfs/repository/d0029/R_torques_L214/R_torques_L214.fasta
-!/nfs/repository/d0029/C_saccharolyticum_like_K10/C_saccharolyticum_like_K10.fasta
-!/nfs/repository/d0002/A_shahii_WAL8301/combined_assembly/gap4/A_shahii_WAL8301.fasta
-!/nfs/repository/d0054/B.pilosicoli/combined_assembly/gap4/Brachyspira_pilosicoli_WesB.fasta 
-!/nfs/repository/d0029/C_dorei_D8/C_dorei_D8.fasta
-
+! LIST OF IMPROVED SEQUENCES to be copied to /nfs/pathogen/metahit/refs/
 ! common_name||genus||species_strain||path_to_fasta_file
-!Ruminococcus_18P13||Ruminococcus||sp_18P13||/nfs/repository/d0029/R_sp_18P13/R_sp_18P13.cons
-!Ecloacae_NCTC9394||Enterobacter||cloacae_NCTC9394||/nfs/repository/d0029/E_cloacae_NCTC9394/combined_assembly/gap4/E_cloacae_NCTC9394.fasta
-!Rtorques_L214||Ruminococcus||torques_L214||/nfs/repository/d0029/R_torques_L214/R_torques_L214.fasta
-!Csaccharolyticum-like_K10||Clostridium||saccharolyticum_like_K10||/nfs/repository/d0029/C_saccharolyticum_like_K10/C_saccharolyticum_like_K10.fasta
-!Ashahii_WAL8301||Alistipez||shahii_WAL8301||/nfs/repository/d0002/A_shahii_WAL8301/combined_assembly/gap4/A_shahii_WAL8301.fasta
-!Bpilosicoli_WesB||Brachyspira||pilosicoli_WesB||/nfs/repository/d0054/B.pilosicoli/combined_assembly/gap4/Brachyspira_pilosicoli_WesB.fasta 
-!Bdorei_D8||Bacteroides||dorei_D8||/nfs/repository/d0029/C_dorei_D8/C_dorei_D8.fasta
+Ashahii_WAL8301||Alistipez||shahii_WAL8301||/nfs/repository/d0002/A_shahii_WAL8301/combined_assembly/gap4/A_shahii_WAL8301.fasta 
+Bdorei_D8||Bacteroides||dorei_D8||/nfs/repository/d0029/C_dorei_D8/C_dorei_D8.fasta
+Blongum_F8||Bifidobacterium||longum_longum_F8||/nfs/repository/d0040/B_longum/B_longum.fasta
+Bpilosicoli_WesB||Brachyspira||pilosicoli_WesB||/nfs/repository/d0054/B.pilosicoli/combined_assembly/gap4/Brachyspira_pilosicoli_WesB.fasta 
+Bxylanisolvens_XB1A||Bacteriodes||xylanisolvens_XB1A||/nfs/repository/d0040/B_xylanisolvens_XB1A/B_xylanisolvens_XB1A.fasta
+Ccomes_SL71||Coprococcus||comes_SL71||/nfs/repository/d0002/C_comes_SL71/C_comes_SL71.fasta
+Clostridiales_SS34||Clostridiales||sp_SS34||/nfs/repository/d0040/U_sp_ss34/U_sp_ss34.fasta
+Csaccharolyticum-like_K10||Clostridium||saccharolyticum_like_K10||/nfs/repository/d0029/C_saccharolyticum_like_K10/C_saccharolyticum_like_K10.fasta
+Ecloacae_NCTC9394||Enterobacter||cloacae_NCTC9394||/nfs/repository/d0029/E_cloacae_NCTC9394/combined_assembly/gap4/E_cloacae_NCTC9394.fasta 
+Enterococcus_7L76||Enterococcus||sp_7L76||/nfs/repository/d0054/E_sp_7L76/E_sp_7L76.fasta
+Ehallii_SM61||Eubacterium||hallii_SM61||/nfs/repository/d0040/E_hallii_SM61/E_hallii_SM61.fasta
+Erectale_A186||Eubacterium||rectale_A186||/nfs/repository/d0029/E_rectale_A186/E_rectale_A186.fasta
+Esiraeum_703||Eubacterium||siraeum_703||/nfs/repository/d0040/E_siraem_703/E_siraem_703.fasta
+Esiraeum_V10Sc8a||Eubacterium||siraeum_V10Sc8a||/nfs/repository/d0028/E_siraeum_V10Sc8a/E_siraeum_V10Sc8a.fasta
+Gpamelaeae_7101bT||Gordonibacter||pamelaeae_7101bT||/nfs/repository/d0002/G_pamalaeae_7101bT/G_pamalaeae_7101bT.fasta
+Mhypermegale_ART121||Megamona||hypermegale_ART121||/nfs/repository/d0040/M_hypermegale_ART121/M_hypermegale_ART121.fasta
+Rbromii_L263||Ruminococcus||bromii_L263||/nfs/repository/d0040/R_bromii_L263/R_bromii_L263.fasta
+Rintestinalis_M501||Roseburia||intestinalis_M501||/nfs/repository/d0029/R_intestinalis_M501/R_intestinalis_M501.fasta
+Rtorques_L214||Ruminococcus||torques_L214||/nfs/repository/d0029/R_torques_L214/R_torques_L214.fasta
+Ruminococcus_18P13||Ruminococcus||sp_18P13||/nfs/repository/d0029/R_sp_18P13/R_sp_18P13.cons
+Ruminococcus_SR15||Ruminococcus||sp_SR15||/nfs/repository/d0040/R_sp_SR15/R_sp_SR15.fasta
+Synergistetes_SGP1||Synergistetes||sp_SGP1||/nfs/repository/d0040/S_sp_SGP1/S_sp_SGP1.fasta
 
-! OLD LIST USED FOR EMBL SUBMISSION
-!Ashahii_WAL8301||Alistipes shahii||WAL 8301||AL1||45913||22x||DSMZ
-!Bxylanisolvens_XB1A||Bacteriodes xylanisolvens||XB1A||BXY||39177||18x||INRA
-!Blongum_F8||Bifidobacterium longum longum||F8||BIL||45963||45x||GHP
+! FASTA FILE NOT FOUND
+!/nfs/repository/d0002/F_prausnitzii_SL33/F_prausnitzii_L26.fasta
+!/nfs/repository/d0002/B_pseudocatenulatum_D2CA/
+
+! ORGANISMS LIST USED FOR EMBL SUBMISSION
 !Bpseudocatenulatum_D2CA||Bifidobacterium pseudocatenulatum||D2CA||BIP||45965||36x||INRA
 !Bfibrisolvens_164||Butyrivibrio fibrisolvens||16/4||CIY||39147||63x||GHP
 !Clostridiales_SM41||Clostridiales sp.||SM4/1||CL3||45955||14x||GHP
 !Clostridiales_SSC2||Clostridiales sp.||SSC/2||CL2||45957||29x||GHP
-!Clostridiales_SS34||Clostridiales sp.||SS3/4||CK3||39155||16x||GHP
-!Csaccharolyticum-like_K10||Clostridium saccharolyticum-like||K10||CLS||45855||20x||GHP
 !Ccatus_GD7||Coprococcus catus||GD/7||CC1||45861||21x||GHP
 !Coprococcus_ART551||Coprococcus sp.||ART55/1||CCU||45915||17x||GHP
-!Ecloacae_NCTC9394||Enterobacter cloacae||NCTC 9394||ENC||45967||15x||NCTC
 !Ecylindroides_T287||Eubacterium cylindroides||T2-87||EC1||45917||19x||GHP
-!Enterococcus_7L76||Enterococcus sp.||7L76||ENT||39181||16x||INRA
-!Erectale_A186||Eubacterium rectale||A1-86 (DSM 17629)||EUR||39159||25x||GHP
 !Erectale_M1041||Eubacterium rectale||M104/1||ERE||39161||21x||GHP
-!Esiraeum_703||Eubacterium siraeum||70/3||EUS||39157||25x||GHP
-!Esiraeum_V10Sc8a||Eubacterium siraeum||V10Sc8a||ES1||45919||26x||GHP
 !Fprausnitzii_L26||Faecalibacterium prausnitzii||L2/6||FP2||45961||29x||GHP
 !Fprausnitzii_SL33||Faecalibacterium prausnitzii||SL3/3||FPR||39151||20x||GHP
-!Gpamelaeae_7101bT||Gordonibacter pamelaeae||7-10-1-bT||GPA||39175||20x||HCIR
-!Mhypermegale_ART121||Megamonas hypermegale||ART12/1||MHY||39163||27x||GHP
-!Rintestinalis_M501||Roseburia intestinalis||M50/1||ROI||39165||25x||GHP
 !Rintestinalis_XB6B4||Roseburia intestinalis||XB6B4||RO1||45953||34x||INRA
-!Rbromii_L263||Ruminococcus bromii||L2-63||RBR||39153||26x||GHP
-!Ruminococcus_18P13||Ruminococcus sp.||18P13||RUM||39179||26x||INRA
-!Ruminococcus_SR15||Ruminococcus sp.||SR1/5||CK1||39149||32x||GHP
 !Robeum_A2162||Ruminococcus obeum||A2-162||CK5||39167||22x||GHP
-!Rtorques_L214||Ruminococcus torques||L2-14||RTO||39169||27x||GHP
-!Synergistetes_SGP1||Synergistetes sp.||SGP1||SY1||45959||47x||DPM
+
+
