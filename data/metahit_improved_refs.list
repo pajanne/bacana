@@ -14,6 +14,7 @@ Ehallii_SM61||Eubacterium||hallii_SM61||/nfs/repository/d0040/E_hallii_SM61/E_ha
 Erectale_A186||Eubacterium||rectale_A186||/nfs/repository/d0029/E_rectale_A186/E_rectale_A186.fasta
 Esiraeum_703||Eubacterium||siraeum_703||/nfs/repository/d0040/E_siraem_703/E_siraem_703.fasta
 Esiraeum_V10Sc8a||Eubacterium||siraeum_V10Sc8a||/nfs/repository/d0028/E_siraeum_V10Sc8a/E_siraeum_V10Sc8a.fasta
+Fprausnitzii_L26||Faecalibacterium||prausnitzii_L26||/nfs/repository/d0002/F_prausnitzii_L26/F_prausnitzii_L26.fasta
 Gpamelaeae_7101bT||Gordonibacter||pamelaeae_7101bT||/nfs/repository/d0002/G_pamalaeae_7101bT/G_pamalaeae_7101bT.fasta
 Mhypermegale_ART121||Megamona||hypermegale_ART121||/nfs/repository/d0040/M_hypermegale_ART121/M_hypermegale_ART121.fasta
 Rbromii_L263||Ruminococcus||bromii_L263||/nfs/repository/d0040/R_bromii_L263/R_bromii_L263.fasta
@@ -23,22 +24,27 @@ Ruminococcus_18P13||Ruminococcus||sp_18P13||/nfs/repository/d0029/R_sp_18P13/R_s
 Ruminococcus_SR15||Ruminococcus||sp_SR15||/nfs/repository/d0040/R_sp_SR15/R_sp_SR15.fasta
 Synergistetes_SGP1||Synergistetes||sp_SGP1||/nfs/repository/d0040/S_sp_SGP1/S_sp_SGP1.fasta
 
-! FASTA FILE NOT FOUND
-!/nfs/repository/d0002/F_prausnitzii_SL33/F_prausnitzii_L26.fasta
-!/nfs/repository/d0002/B_pseudocatenulatum_D2CA/
+! FASTA FILES NOT FOUND
+Bpseudocatenulatum_D2CA||Bifidobacterium||pseudocatenulatum_D2CA||/nfs/repository/d0002/B_pseudocatenulatum_D2CA/
+Fprausnitzii_SL33||Faecalibacterium||prausnitzii_SL33||/nfs/repository/d0002/F_prausnitzii_SL33/F_prausnitzii_L26.fasta
 
-! ORGANISMS LIST USED FOR EMBL SUBMISSION
-!Bpseudocatenulatum_D2CA||Bifidobacterium pseudocatenulatum||D2CA||BIP||45965||36x||INRA
-!Bfibrisolvens_164||Butyrivibrio fibrisolvens||16/4||CIY||39147||63x||GHP
-!Clostridiales_SM41||Clostridiales sp.||SM4/1||CL3||45955||14x||GHP
-!Clostridiales_SSC2||Clostridiales sp.||SSC/2||CL2||45957||29x||GHP
-!Ccatus_GD7||Coprococcus catus||GD/7||CC1||45861||21x||GHP
-!Coprococcus_ART551||Coprococcus sp.||ART55/1||CCU||45915||17x||GHP
-!Ecylindroides_T287||Eubacterium cylindroides||T2-87||EC1||45917||19x||GHP
-!Erectale_M1041||Eubacterium rectale||M104/1||ERE||39161||21x||GHP
-!Fprausnitzii_L26||Faecalibacterium prausnitzii||L2/6||FP2||45961||29x||GHP
-!Fprausnitzii_SL33||Faecalibacterium prausnitzii||SL3/3||FPR||39151||20x||GHP
-!Rintestinalis_XB6B4||Roseburia intestinalis||XB6B4||RO1||45953||34x||INRA
-!Robeum_A2162||Ruminococcus obeum||A2-162||CK5||39167||22x||GHP
+! ORGANISMS LIST WITHOUT IMPROVED SEQ
+!Bfibrisolvens_164||Butyrivibrio||fibrisolvens_164||
+!Baalborgii_513||Brachyspira||aalborgii_513||
+!Bpilosicolo_WesB||Brachyspira||pilosicoli_WesB||
+!Clostridiales_SM41||Clostridiales||sp_SM41||
+!Clostridiales_SSC2||Clostridiales||sp_SSC2||
+!Ccatus_GD7||Coprococcus||catus_GD7||
+!Coprococcus_ART551||Coprococcus||sp_ART551||
+!Ecylindroides_T287||Eubacterium||cylindroides_T287||
+!Erectale_M1041||Eubacterium||rectale_M1041||
+!Rintestinalis_XB6B4||Roseburia||intestinalis_XB6B4||
+!Robeum_A2162||Ruminococcus||obeum_A2162||
+!Rfaecis_CC123||Roseburia||faecis_CC123||	  	  	  	  	  
+!Rfaecis_11SE37||Roseburia||aecis_11SE37||	  	  	  	  	  
+
+
+
+
 
 

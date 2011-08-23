@@ -15,6 +15,7 @@ def main():
     usage = "usage: %prog -l LIST"
     parser = OptionParser(usage=usage)
     parser.add_option("-l", metavar="FILE", help="FILE containing the list of all files", action="store", type="string", dest="list")
+    parser.add_option("-o", help="To override copied files", action="store_true", dest="override")
     (options, args) = parser.parse_args()
     
     if not (options.list):
@@ -45,12 +46,22 @@ def main():
                     if not os.path.isfile(fasta_file):
                         print "NO FILE   %s" % fasta_file
                     else:
+                        # original file found
                         print "FOUND     %s" % fasta_file
                         new_fasta_file = "%s/%s" % (new_fasta_file_path, new_fasta_file_name)
-                        print "Copying %s to %s" % (fasta_file, new_fasta_file)
+                        # create new path if does not exit under /nfs/pathogen/metahit/refs/
                         if not os.path.exists(new_fasta_file_path):
                             os.makedirs(new_fasta_file_path)
-                        shutil.copyfile(fasta_file, new_fasta_file)
+                        # copy fasta file if it does not exit
+                        if not os.path.exists(new_fasta_file):
+                            print "COPY      %s to %s" % (fasta_file, new_fasta_file)
+                            shutil.copyfile(fasta_file, new_fasta_file)
+                        else:
+                            if (options.override):
+                                print "REPLACE   %s to %s" % (fasta_file, new_fasta_file)
+                                shutil.copyfile(fasta_file, new_fasta_file)
+                            else:
+                                print "EXISTS    %s" % new_fasta_file
 
 ### ---------------------------------------------------------------------------
 if __name__ == '__main__':
