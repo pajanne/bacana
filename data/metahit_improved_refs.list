@@ -7,7 +7,7 @@ Bfibrisolvens_164||Butyrivibrio||fibrisolvens_164||/nfs/repository/d0040/B_fibri
 Blongum_F8||Bifidobacterium||longum_longum_F8||/nfs/repository/d0040/B_longum/B_longum.fasta
 Bpilosicoli_WesB||Brachyspira||pilosicoli_WesB||/nfs/repository/d0054/B.pilosicoli/combined_assembly/gap4/Brachyspira_pilosicoli_WesB.fasta 
 Bpseudocatenulatum_D2CA||Bifidobacterium||pseudocatenulatum_D2CA||/nfs/repository/d0054/B_pseudocatenulatum_D2CA/B_pseudocatenulatum_D2CA.fasta
-Bxylanisolvens_XB1A||Bacteriodes||xylanisolvens_XB1A||/nfs/repository/d0040/B_xylanisolvens_XB1A/B_xylanisolvens_XB1A.fasta
+Bxylanisolvens_XB1A||Bacteroides||xylanisolvens_XB1A||/nfs/repository/d0040/B_xylanisolvens_XB1A/B_xylanisolvens_XB1A.fasta
 Ccatus_GD7||Coprococcus||catus_GD7||/nfs/repository/d0028/C_catus_GD7/C_catus_GD7.fasta
 Ccomes_SL71||Coprococcus||comes_SL71||/nfs/repository/d0002/C_comes_SL71/C_comes_SL71.fasta
 Clostridiales_SS34||Clostridiales||sp_SS34||/nfs/repository/d0040/U_sp_ss34/U_sp_ss34.fasta
@@ -21,7 +21,6 @@ Erectale_A186||Eubacterium||rectale_A186||/nfs/repository/d0029/E_rectale_A186/E
 Esiraeum_703||Eubacterium||siraeum_703||/nfs/repository/d0040/E_siraem_703/E_siraem_703.fasta
 Esiraeum_V10Sc8a||Eubacterium||siraeum_V10Sc8a||/nfs/repository/d0028/E_siraeum_V10Sc8a/E_siraeum_V10Sc8a.fasta
 Fprausnitzii_L26||Faecalibacterium||prausnitzii_L26||/nfs/repository/d0002/F_prausnitzii_L26/F_prausnitzii_L26.fasta
-Fprausnitzii_SL33||Faecalibacterium||prausnitzii_SL33||/nfs/repository/d0002/F_prausnitzii_L26/F_prausnitzii_L26.fasta
 Gpamelaeae_7101bT||Gordonibacter||pamelaeae_7101bT||/nfs/repository/d0002/G_pamalaeae_7101bT/G_pamalaeae_7101bT.fasta
 Mhypermegale_ART121||Megamona||hypermegale_ART121||/nfs/repository/d0040/M_hypermegale_ART121/M_hypermegale_ART121.fasta
 Rbromii_L263||Ruminococcus||bromii_L263||/nfs/repository/d0040/R_bromii_L263/R_bromii_L263.fasta
@@ -33,14 +32,11 @@ Ruminococcus_SR15||Ruminococcus||sp_SR15||/nfs/repository/d0040/R_sp_SR15/R_sp_S
 Synergistetes_SGP1||Synergistetes||sp_SGP1||/nfs/repository/d0040/S_sp_SGP1/S_sp_SGP1.fasta
 
 ! ORGANISMS LIST WITHOUT IMPROVED SEQ
-!Bpilosicolo_WesB||Brachyspira||pilosicoli_WesB||
 !Clostridiales_SM41||Clostridiales||sp_SM41||
 !Clostridiales_SSC2||Clostridiales||sp_SSC2||
 !Erectale_M1041||Eubacterium||rectale_M1041||
 !Robeum_A2162||Ruminococcus||obeum_A2162||
-
-!Rfaecis_CC123||Roseburia||faecis_CC123||	  	  	  	  	  
-!Rfaecis_11SE37||Roseburia||aecis_11SE37||	  	  	  	  	  
+!Fprausnitzii_SL33||Faecalibacterium||prausnitzii_SL33||
 
 
 
