@@ -1,0 +1,150 @@
+### ----------------------------------------------------------------------------
+### HOW TO USE THE PIPELINE
+### ----------------------------------------------------------------------------
+
+### ----------------------------------------------------------------------------
+### Run annotation pipeline
+### ----------------------------------------------------------------------------
+
+---
+--- Log into a machine with /software mounted (e.g. pcs4) as yourself
+---
+> bash
+> source /nfs/users/nfs_a/ap12/git/ann-pipeline/setup_annotation_environment.sh
+> run_annotation_pipeline.sh -d /lustre/scratch101/sanger/ap12/ann_pipeline/ -n Ashahii_WAL8301 -f /nfs/users/nfs_a/ap12/Ashahii_WAL8301_merged.fasta
+
+---
+--- Usage
+---
+The fasta sequence file provided must contain only one record.
+
+Usage: run_annotation_pipeline.sh -d DEST_DIR -n COMMON_NAME -f FASTA_FILE
+
+Options:
+
+-d DEST_DIR  
+   Directory where the output of the pipeline will be written to
+   e.g. /lustre/scratch101/sanger/ap12/ann_pipeline/
+
+-n COMMON_NAME     
+   Unique common NAME 
+   e.g. Ashahii_WAL8301
+
+-f FASTA_FILE     
+   Path to the fasta FILE 
+   e.g. /nfs/pathogen/metahit/refs/Alistipez/shahii_WAL8301/improved/Alistipez_shahii_WAL8301.fasta
+
+The annotation pipeline run the gene finding and gene function steps.
+
+---
+--- Information about completed, failed and todo jobs
+---
+> run-pipeline -c /lustre/scratch101/sanger/ap12/ann_pipeline/annotation_pipeline.conf --done
+> run-pipeline -c /lustre/scratch101/sanger/ap12/ann_pipeline/annotation_pipeline.conf --failed
+> run-pipeline -c /lustre/scratch101/sanger/ap12/ann_pipeline/annotation_pipeline.conf --todo
+
+### ----------------------------------------------------------------------------
+### Results
+### ----------------------------------------------------------------------------
+
+e.g. /lustre/scratch101/sanger/ap12/ann_pipeline/Ashahii_WAL8301/results/
+
+Each step creates its own sub-directory under $DEST_DIR/$COMMON_NAME/. Final results are found under sub-directory:
+
+$DEST_DIR/$COMMON_NAME/results/
+
+### ----------------------------------------------------------------------------
+### Steps Run
+### ----------------------------------------------------------------------------
+
+---
+--- Gene Finding
+---
+Task	 	 Software name	 Pipeline action	 Dev status	 Dependencies
+CDSs	         Glimmer3	 run_glimmer3	         running	 /software/pathogen/external/applications/glimmer/glimmer/scripts/g3-iterated.csh
+CDSs	         Prodigal	 run_prodigal	         running	 /software/pathogen/external/bin/prodigal
+rRNA	         RNAmmer	 run_rnammer	         running	 /nfs/users/nfs_a/ap12/lib/rnammer-1.2/rnammer
+tRNA	         tRNAscan	 run_trnascan	         running	 /software/pathogen/external/bin/tRNAscan-SE
+Repeats	         RepeatScout	 run_repeatscout	 running	 /software/pathogen/external/applications/repeatscout/RepeatScout-1/; /software/pubseq/bin/RepeatMasker
+Genomic islands	 AlienHunter	 run_alienhunter	 running	 /nfs/users/nfs_a/ap12/tmp/alien_hunter/alien_hunter
+Pseudo genes	 BlastX	         run_blastx	         in progress	 /software/bin/blastall -p blastx -d /data/blastdb/uniprot
+ncRNA	         Rfamscan	 run_rfamscan	         in progress	 /software/pathogen/psu_svn/trunk/genexec/perl/src/rfam_scan.pl; /lustre/scratch101/blastdb/Rfam/Rfam_9.1/Rfam.cm
+Merge CDSs	 gfind_merger	 run_merger	         running	 /nfs/users/nfs_a/ap12/genlibpy/genepy/pathtrack/gfind_merger.py
+
+---
+--- Gene Functions
+---
+Task	         Software name	 Pipeline action	 Dev status	 Dependencies
+Protein domains	 Pfamscan	 run_pfamscan	         in progress	 /software/pathogen/external/applications/pfam_scan/bin/pfam_scan.pl; /data/blastdb
+Similarities	 BlastP	         run_blastp	         in progress	 /software/bin/blastall -p blastp -d /data/blastdb/uniprot
+Hydro. features	 SignalP	 run_signalp	         in progress	 /software/pathogen/external/applications/signalp/signalp/signalp
+Hydro. features	 TMHMM	         run_tmhmm	         in progress	 /software/pathogen/external/applications/TMHMM/TMHMM2.0c/bin/tmhmm
+Structure	 HTH	         run_hth	         in progress	 /software/pathogen/external/applications/EMBOSS/bin/helixturnhelix
+Protein domains	 Prosite		                 to implement	
+Orthologs	 HAMAP		                         to implement	
+
+
+### ----------------------------------------------------------------------------
+### FOR DEVELOPERS
+### ----------------------------------------------------------------------------
+
+### ----------------------------------------------------------------------------
+### Code base
+### ----------------------------------------------------------------------------
+
+> git clone git+ssh://git@github.com:pajanne/ann-pipeline.git
+
+---
+--- checkout of the pipeline code
+---
+/nfs/users/nfs_a/ap12/git/ann-pipeline/
+
+### ----------------------------------------------------------------------------
+### Environment variables
+### ----------------------------------------------------------------------------
+
+see setup_annotation_environment.sh
+
+A special EMBOSS installation is required for running merge_sequence.sh, the operating system has been upgraded and /usr/lib/libpq.so.4 has been replaced by libpq.so.5.
+/software/pathogen/external/applications/EMBOSS-6.3.1-no-postgres/bin/
+
+### ----------------------------------------------------------------------------
+### Configuration files
+### ----------------------------------------------------------------------------
+
+Configuration files are generated using generate_config_file.py.
+
+Usage: generate_config_file.py -n NAME -f FILE -r ROOT
+
+Options:
+ -h, --help  show this help message and exit
+ -n NAME     Unique common NAME (e.g. Bpseudomallei_K96243)
+ -f FILE     Path to the fasta FILE (e.g. /lustre/scratch103/sanger/ap12/test
+             _data/Burkholderia_pseudomallei_K96243.fna)
+ -r ROOT     ROOT directory where the output of pipeline will be written to
+             (e.g. /lustre/scratch101/sanger/ap12/ann_pipeline/)
+ -c CONF     CONFiguration file name (e.g. annotation_pipeline.conf)
+
+---
+--- One example: /lustre/scratch101/sanger/ap12/ann_pipeline/annotation_pipeline.conf
+---
+glimmer        /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_glimmer.conf 
+prodigal       /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_prodigal.conf
+rnammer        /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_rnammer.conf
+trnascan       /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_trnascan.conf
+repeatscout    /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_repeatscout.conf 
+alienhunter    /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_alienhunter.conf
+results	       /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_results.conf
+
+---
+--- Example of Glimmer configuration file: /lustre/scratch101/sanger/ap12/ann_pipeline//conf/Ashahii_WAL8301_glimmer.conf
+---
+root    => '/lustre/scratch101/sanger/ap12/ann_pipeline//Ashahii_WAL8301',
+module  => 'Pathogens::Annotate::Glimmer',
+prefix  => '_',
+log	=> '/lustre/scratch101/sanger/ap12/ann_pipeline//log/Ashahii_WAL8301.log',
+
+data => {
+   fasta => '/lustre/scratch101/sanger/ap12/ann_pipeline//Ashahii_WAL8301.fasta',
+   common_name => 'Ashahii_WAL8301',
+},
