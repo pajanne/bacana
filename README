@@ -53,25 +53,26 @@ $DEST_DIR/$COMMON_NAME/results/
 
 --- Gene Prediction ------------------------------------------------------------
 Task	 	 Software name	 Pipeline action	 Dev status
-CDSs	         Glimmer3	 run_glimmer3	         running
-CDSs	         Prodigal	 run_prodigal	         running
-rRNA	         RNAmmer	 run_rnammer	         running
-tRNA	         tRNAscan	 run_trnascan	         running
-Repeats	         RepeatScout	 run_repeatscout	 running
-Genomic islands	 AlienHunter	 run_alienhunter	 running
-Pseudo genes	 BlastX	         run_blastx	         in progress
-ncRNA	         Rfamscan	 run_rfamscan	         in progress
-Merge CDSs	 gfind_merger	 run_merger	         running
+CDSs	         Glimmer3	 glimmer	         running
+CDSs	         Prodigal	 prodigal	         running
+rRNA	         RNAmmer	 rnammer	         running
+tRNA	         tRNAscan	 trnascan	         running
+Repeats	         RepeatScout	 repeatscout	         running
+Genomic islands	 AlienHunter	 alienhunter	         running
+Pseudo genes	 BlastX	         blastx	                 in progress
+ncRNA	         Rfamscan	 rfamscan	         in progress
+Merge CDSs	 gfind_merger	 results	         running
 
 --- Gene Annotation ------------------------------------------------------------
 Task	         Software name	 Pipeline action	 Dev status
-Protein domains	 Pfamscan	 run_pfamscan	         in progress
-Similarities	 BlastP	         run_blastp	         in progress
-Hydro. features	 SignalP	 run_signalp	         in progress
-Hydro. features	 TMHMM	         run_tmhmm	         in progress
-Structure	 HTH	         run_hth	         in progress
-Protein domains	 Prosite		                 to implement	
-Orthologs	 HAMAP		                         to implement	
+Protein domains	 Pfamscan	 pfamscan	         in progress
+Similarities	 BlastP	         blastp	                 in progress
+Hydro. features	 SignalP	 signalp	         in progress
+Hydro. features	 TMHMM	         tmhmm	                 in progress
+Structure	 HTH	         hth     	         in progress
+Protein domains	 Prosite	 prosite                 to implement	
+Orthologs	 HAMAP		 hamap                   to implement	
+Merge features                   results                 in progress
 
 
 ### ----------------------------------------------------------------------------
