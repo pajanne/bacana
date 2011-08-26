@@ -8,9 +8,10 @@
 # VR codebase
 #export VR_CODEBASE=/nfs/users/nfs_a/ap12/git/vr-codebase
 export VR_CODEBASE=/software/pathogen/internal/pathdev/vr-codebase/
+alias run-pipeline=/software/pathogen/internal/pathdev/vr-codebase/scripts/run-pipeline
 
 # Pathogens Annotation Pipeline
-export ANN_PIPELINE=/nfs/users/nfs_a/ap12/git/ann-pipeline
+export BACANA=/nfs/users/nfs_a/ap12/git/bacana
 
 ### ----------------------------------------------------------------------------
 # Set up environment to use LSF
@@ -37,11 +38,12 @@ export https_proxy="https://wwwcache.sanger.ac.uk:3128"
 
 ### ----------------------------------------------------------------------------
 # Set up perl environment
+alias perl=/software/perl-5.8.8/bin/perl
 export PERL_INLINE_DIRECTORY=/nfs/users/nfs_p/pathpipe/_Inline
 export PERLDOC_PAGER=less
 export PERL5LIB=/software/vertres/lib/all
 export PERL5LIB=$PERL5LIB:$VR_CODEBASE/modules
-export PERL5LIB=$PERL5LIB:$ANN_PIPELINE/modules
+export PERL5LIB=$PERL5LIB:$BACANA/modules
 export PERL5LIB=$PERL5LIB:/software/pathogen/internal/pathdev/lib
 export PERL5LIB=$PERL5LIB:/software/pathogen/internal/prod/lib
 export PERL5LIB=$PERL5LIB:/software/pathogen/internal/preprod/lib
@@ -72,7 +74,7 @@ export PATH=$PATH:/software/pathogen/external/apps/usr/local/sbin
 export PATH=$PATH:/software/pathogen/external/apps/sbin
 export PATH=$PATH:/software/vertres/bin-external/
 # Specific for annotation pipeline
-export PATH=$PATH:$ANN_PIPELINE/scripts
+export PATH=$PATH:$BACANA/scripts
 export PATH=$PATH:/software/pathogen/external/applications/glimmer/glimmer/scripts/ # g3-iterated.csh 
 export PATH=/software/pathogen/external/bin/:$PATH # prodigal & tRNAscan-SE
 export PATH=$PATH:/nfs/users/nfs_a/ap12/lib/rnammer-1.2/ # rnammer

@@ -7,7 +7,7 @@ First, log into a Sanger machine with /software mounted (e.g. pcs4) as yourself
 Then type:
 
 > bash
-> source /nfs/users/nfs_a/ap12/git/ann-pipeline/setup_annotation_environment.sh
+> source /nfs/users/nfs_a/ap12/git/bacana/setup_annotation_environment.sh
 > run_annotation_pipeline.sh -d /lustre/scratch101/sanger/ap12/ann_pipeline/ -n Ashahii_WAL8301 -f /nfs/users/nfs_a/ap12/Ashahii_WAL8301_merged.fasta
 
 --- Usage ----------------------------------------------------------------------
@@ -79,16 +79,16 @@ Merge features                   results                 in progress
 ### How to get the code base
 ### ----------------------------------------------------------------------------
 
-> git clone git+ssh://git@github.com:pajanne/ann-pipeline.git
+> git clone git@github.com:pajanne/bacana.git
 
 --- checkout of the pipeline code ----------------------------------------------
-/nfs/users/nfs_a/ap12/git/ann-pipeline/
+/nfs/users/nfs_a/ap12/git/bacana/
 
 ### ----------------------------------------------------------------------------
 ### Environment variables
 ### ----------------------------------------------------------------------------
 
-see https://github.com/pajanne/ann-pipeline/blob/master/setup_annotation_environment.sh
+see https://github.com/pajanne/bacana/blob/master/setup_annotation_environment.sh
 
 A special EMBOSS installation is required for running merge_sequence.sh, the operating system has been upgraded and /usr/lib/libpq.so.4 has been replaced by libpq.so.5.
 /software/pathogen/external/applications/EMBOSS-6.3.1-no-postgres/bin/
@@ -131,3 +131,16 @@ data => {
    fasta => '/lustre/scratch101/sanger/ap12/ann_pipeline//Ashahii_WAL8301.fasta',
    common_name => 'Ashahii_WAL8301',
 },
+
+### ----------------------------------------------------------------------------
+### How to add a new step to the pipeline
+### ----------------------------------------------------------------------------
+
+--- Create module --------------------------------------------------------------
+Add an extra module into modules/Pathogens/Annotate/ using existing one as an example (e.g. https://github.com/pajanne/bacana/blob/master/modules/Pathogens/Annotate/Glimmer.pm)
+
+--- Generate config file -------------------------------------------------------
+Add module name into GFIND_STEPS = ['Glimmer', 'Prodigal', 'Rnammer', 'Trnascan', 'RepeatScout', 'AlienHunter', 'Results']
+in scripts/generate_config_file.py
+
+--- Merge results --------------------------------------------------------------
