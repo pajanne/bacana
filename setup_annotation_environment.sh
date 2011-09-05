@@ -24,8 +24,12 @@ export XLSF_UIDDIR=/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/uid
 export LD_LIBRARY_PATH=/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib:$LD_LIBRARY_PATH
 
 ### ----------------------------------------------------------------------------
-alias python=/software/bin/python-2.7
+# Set up vr environment for external softwares
+export PICARD=/software/pathogen/external/applications/Picard/picard-tools-1.44
+
+### ----------------------------------------------------------------------------
 # Set up python environment
+alias python=/software/bin/python-2.7
 export PYTHONPATH=/nfs/users/nfs_a/ap12/lib/gdata-2.0.10/lib/python
 #export PYTHONPATH=$PYTHONPATH:/nfs/users/nfs_a/ap12/genlibpy
 export PYTHONPATH=$PYTHONPATH:/nfs/users/nfs_a/ap12/lib/biopython-1.58/lib/python

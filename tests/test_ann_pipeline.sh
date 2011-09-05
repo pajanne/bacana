@@ -36,7 +36,7 @@ do
     esac 
 done 
 
-if [[ -z $TEST_DIR ]] 
+if [ -z $TEST_DIR ] 
 then
     echo "You must supply a output test directory (-d)."
     usage
@@ -47,10 +47,10 @@ fi
 # setting test directory
 #
 echo "Setting output test directory $TEST_DIR"
-if [[ -f $TEST_DIR ]]
+if [ -d $TEST_DIR ]
 then
     echo "Creating test directory $TEST_DIR"
-    mkdir $TEST_DIR
+    mkdir -p $TEST_DIR
 fi
 
 # 
@@ -77,7 +77,7 @@ echo "Sourced setup environment $SETUP_SCRIPT"
 # generating config files
 #
 CONF_FILE="annotation_pipeline.conf"
-if [[ -f $TEST_DIR/$CONF_FILE ]]
+if [ -f $TEST_DIR/$CONF_FILE ]
 then
     echo "Removing existing configuration file $CONF_FILE"
     rm -f $TEST_DIR/$CONF_FILE

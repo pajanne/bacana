@@ -56,10 +56,10 @@ fi
 # setting output directory
 #
 echo "Setting output directory $DEST_DIR"
-if [ ! -f $DEST_DIR ]
+if [ ! -d $DEST_DIR ]
 then
     echo "Creating directory $DEST_DIR"
-    mkdir $DEST_DIR
+    mkdir -p $DEST_DIR
 fi
 
 # 
@@ -92,7 +92,7 @@ then
 fi
 
 NB_RECORD=`more $FASTA_FILE | grep '>' | wc -l`
-if [[ $NB_RECORD > 1 ]]
+if [ $NB_RECORD > 1 ]
 then
     echo "More than one record in $FASTA_FILE"
     echo "$NB_RECORD records found, please merge sequence before running the pipeline again."
