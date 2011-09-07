@@ -47,7 +47,7 @@ fi
 # setting test directory
 #
 echo "Setting output test directory $TEST_DIR"
-if [ -d $TEST_DIR ]
+if [ ! -d $TEST_DIR ]
 then
     echo "Creating test directory $TEST_DIR"
     mkdir -p $TEST_DIR
